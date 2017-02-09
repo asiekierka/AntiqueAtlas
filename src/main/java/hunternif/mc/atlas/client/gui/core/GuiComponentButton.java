@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.audio.PositionedSound;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 
 /** A GuiComponent that can act like a button. */
 public class GuiComponentButton extends GuiComponent {
-	private static final ResourceLocation DEFAULT_CLICK_SOUND = new ResourceLocation("gui.button.press");
-	
-	private final List<IButtonListener> listeners = new ArrayList<>();
+  private final List<IButtonListener> listeners = new ArrayList<>();
 	
 	private boolean enabled = true;
-	private ResourceLocation clickSound = DEFAULT_CLICK_SOUND;
+	private SoundEvent clickSound = SoundEvents.UI_BUTTON_CLICK;
 	
 	public void setEnabled(boolean value) {
 		enabled = value;
@@ -24,7 +25,7 @@ public class GuiComponentButton extends GuiComponent {
 		return enabled;
 	}
 	
-	public void setClickSound(ResourceLocation clickSound) {
+	public void setClickSound(SoundEvent clickSound) {
 		this.clickSound = clickSound;
 	}
 	/** Makes the button produce no sound when clicked on. */
@@ -45,7 +46,7 @@ public class GuiComponentButton extends GuiComponent {
 	@SuppressWarnings("unchecked")
 	protected void onClick() {
 		if (clickSound != null) {
-			mc.getSoundHandler().playSound(new PositionedSound(clickSound, SoundCategory.BLOCKS) {});//.playSound(new PositionedSoundRecord(clickSound, 1.0F));
+			mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(clickSound, 1.0F));//.playSound(new PositionedSoundRecord(clickSound, 1.0F));
 		}
 		for (IButtonListener listener : listeners) {
 			listener.onClick(this);

@@ -74,8 +74,8 @@ public class AntiqueAtlasMod {
 			.setRegistryName(ID, "emptyAntiqueAtlas").setUnlocalizedName("emptyAntiqueAtlas")
 			.setCreativeTab(CreativeTabs.TOOLS);
 		
-		GameRegistry.register(itemAtlas);
-		GameRegistry.register(itemEmptyAtlas);
+		GameRegistry.register(itemAtlas.setRegistryName("antiqueAtlas"));
+		GameRegistry.register(itemEmptyAtlas.setRegistryName("emptyAntiqueAtlas"));
 	}
 	
 	@EventHandler

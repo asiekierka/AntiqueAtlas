@@ -73,7 +73,7 @@ public class NetherPortalWatcher extends DummyWorldAccess {
 			if (isEntityInPortal(entity)) {
 				Log.info("Exiting");
 				// player.worldObj.provider.dimensionId is the dimension of origin
-				int dimension = player.worldObj.provider.getDimension();
+				int dimension = player.getEntityWorld().provider.getDimension();
 				Log.info("Player %s left the %s", player.getGameProfile().getName(),
 						dimension == 0 ? "Overworld" : "Nether");
 				teleportingPlayerIDs.add(entity.getEntityId());
